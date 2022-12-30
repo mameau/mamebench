@@ -1,0 +1,22 @@
+diff --git a/src/emu/profiler.cpp b/src/emu/profiler.cpp
+index 765373e34e7..7fbdd89364a 100644
+--- a/src/emu/profiler.cpp
++++ b/src/emu/profiler.cpp
+@@ -23,6 +23,7 @@
+ 
+ #include "emu.h"
+ #include "profiler.h"
++#include <iostream>
+ 
+ 
+ 
+@@ -221,6 +222,9 @@ void real_profiler_state::update_text(running_machine &machine)
+ 						break;
+ 					}
+ 
++			// output to console
++			osd_printf_info("[PROFILER START]\n%s\n[PROFILER END]\n",stream.str());
++
+ 			// followed by a carriage return
+ 			stream << '\n';
+ 		}

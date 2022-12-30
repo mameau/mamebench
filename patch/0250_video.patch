@@ -1,19 +1,18 @@
 diff --git a/src/emu/video.cpp b/src/emu/video.cpp
-index 8f9e9e3623a..700f800ef93 100644
+index 8f9e9e3623a..0d2b3c9ae71 100644
 --- a/src/emu/video.cpp
 +++ b/src/emu/video.cpp
-@@ -980,7 +980,22 @@ void video_manager::recompute_speed(const attotime &emutime)
+@@ -980,6 +980,19 @@ void video_manager::recompute_speed(const attotime &emutime)
  				m_overall_real_seconds++;
  			}
  			m_overall_emutime += delta_emutime;
 +
 +			// hack to output current speed
 +			int current_sec = (m_overall_emutime + attotime(0, ATTOSECONDS_PER_SECOND / 2)).seconds();
-+
 +			double current_real_time = (double)m_overall_real_seconds + (double)m_overall_real_ticks / (double)tps;
 +			double current_emu_time = m_overall_emutime.as_double();
 +			osd_printf_info(
-+				"%s,%.2f%%,%.2f%%,%.2f%%,%d\n", 
++				"[SPEED] %s,%.2f%%,%.2f%%,%.2f%%,%d\n", 
 +				machine().basename(),
 +				m_speed_percent,
 +				100 * m_speed_percent,
@@ -21,7 +20,5 @@ index 8f9e9e3623a..700f800ef93 100644
 +				current_sec
 +			);
  		}
-+
  	}
  
- 	// if we're past the "time-to-execute" requested, signal an exit
